@@ -66,7 +66,7 @@
 		<div class="ui-content ui-content-padding">
 			<span id="message">Please enter the server's IP address.</span>
 			<input id="address" type="text">
-			<button class="btn" id="connect">Connect</button>
+			<button class="btn" onclick="connect()" id="connect">Connect</button>
 		</div>
 	</div>
 	<div class="ui-page" id="display">
@@ -75,7 +75,7 @@
 		</header>
 		<div class="ui-content ui-content-padding">
 			<h1 id="heart-rate">0</h1>
-			<button style="margin-top: 25px" class="btn" id="disconnect">Disconnect</button>
+			<button style="margin-top: 25px" class="btn" onclick="disconnect()" id="disconnect">Disconnect</button>
 		</div>
 	</div>
 	<script src="lib/tau/wearable/js/tau.min.js"></script>

@@ -136,8 +136,8 @@
 		var toAsk = checkInitialPermissions();
 		requestPermissions(toAsk);
 	});
-	document.getElementById('connect').addEventListener('click', function() {
-		var address = document.getElementById("address").innerText;
+	function connect() {
+		var address = document.getElementById("address").value;
 		var message = document.getElementById("message");
 		if (address.replace(" ", "").length > 0) {
 			ws = new WebSocket("ws://" + address + ":9288");
@@ -158,16 +158,18 @@
 				clearInterval(intervalID);
 				tizen.humanactivitymonitor.stop("HRM");
 				changePage("connect");
-			})
+			});
 			
 		} else {
 			message.classList.add('cl-red');
-			message.innerText = "Please enter an address."
+			message.innerText = "Please enter an address.";
 		}
-	});
-	document.getElementById("disconnect").addEventListener('click', function() {
+	}
+	function disconnect() {
 		ws.close();
-	});
+	}
+	window.connect = connect;
+	window.disconnect = disconnect;
 	
 	// main
 	function init() {
