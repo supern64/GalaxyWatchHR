@@ -13,8 +13,10 @@ function connect() {
 	});
 	socket.addEventListener('close', resetConnection);
 	socket.addEventListener('message', function (event) {
-	    var message = JSON.parse(event.data);
-	    hr.innerText = message.hr;
+		var message = JSON.parse(event.data);
+		if (message.hr) {
+			hr.innerText = message.hr;
+		}
 	});
 }
 

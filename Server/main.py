@@ -15,8 +15,8 @@ ax = fig.add_subplot(1, 1, 1)
 plt.rc("axes", titlesize=16)
 
 def on_animation(i, x_time, y_hr):
-    x_time = x_time[-60:]
-    y_hr = y_hr[-60:]
+    x_time = x_time[-100:]
+    y_hr = y_hr[-100:]
     real_hr = list(filter(lambda x: 10 < x < 220, y_hr))
 
     if len(real_hr) != 0:
@@ -32,7 +32,7 @@ def on_animation(i, x_time, y_hr):
     except IndexError:
         hr = 0
 
-    plt.xticks(rotation=45, ha='right')
+    plt.xticks(rotation=90, fontsize=8)
     plt.title('Heart Rate Monitor\nCurrent: ' + str(hr) + " Average: " + str(average_hr))
     plt.ylabel('Heart Rate (bpm)')
 
@@ -41,6 +41,12 @@ def on_join(client, server):
     print("Client @ " + client["address"][0] + " connected.")
 
 def on_leave(client, server):
+    if client["type"] == "watch":
+        for client in server.clients:
+                if "type" in client and client["type"] == "display":
+                    server.send_message(client, json.dumps({"type": "data", "hr": 0}))
+        x_time = []
+        y_hr = []
     print("Client @ " + client["address"][0] + " disconnected.")
 
 def on_message(client, server, message):
@@ -73,8 +79,9 @@ def on_message(client, server, message):
             hr = message["hr"]
             if hr < 0:
                 hr = 0
-            y_hr.append(hr)
-            x_time.append(dt.datetime.now().strftime("%H:%M:%S.%f"))
+            if hr != 0:
+                y_hr.append(hr)
+                x_time.append(dt.datetime.now().strftime("%H:%M:%S.%f")[:-5])
             for client in server.clients:
                 if "type" in client and client["type"] == "display":
                     server.send_message(client, json.dumps({"type": "data", "hr": hr}))
