@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://yourdomain/GalaxyWatchHR" version="1.0.0" viewmodes="maximized">
     <tizen:application id="f25eH8ykbY.GalaxyWatchHR" package="f25eH8ykbY" required_version="2.3.2"/>
+    <author>SuperN64</author>
+    <tizen:background-category value="sensor"/>
+    <tizen:background-category value="iot-communication"/>
     <content src="index.html"/>
+    <description>A program for transferring the heart rate data on a Galaxy Watch to a PC in real-time.</description>
     <feature name="http://tizen.org/feature/screen.size.normal"/>
+    <feature name="http://tizen.org/feature/humanactivitymonitor"/>
+    <feature name="http://tizen.org/feature/network.internet"/>
+    <feature name="http://tizen.org/feature/sensor.heart_rate_monitor"/>
     <icon src="icon.png"/>
-    <name>GalaxyWatchHR</name>
+    <license href="https://github.com/supern64/GalaxyWatchHR/blob/master/LICENSE">MIT</license>
+    <name>HR2PC</name>
+    <tizen:privilege name="http://tizen.org/privilege/location"/>
+    <tizen:privilege name="http://tizen.org/privilege/healthinfo"/>
+    <tizen:privilege name="http://tizen.org/privilege/power"/>
+    <tizen:privilege name="http://tizen.org/privilege/internet"/>
     <tizen:profile name="wearable"/>
     <tizen:setting hwkey-event="enable"/>
+    <tizen:setting background-support="enable"/>
 </widget>

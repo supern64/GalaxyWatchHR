@@ -10,7 +10,7 @@ y_hr = []
 x_time = []
 
 plt.style.use('dark_background')
-fig = plt.figure("GalaxyWatchHR v1.0.0")
+fig = plt.figure("HR2PC v1.0.0")
 ax = fig.add_subplot(1, 1, 1)
 plt.rc("axes", titlesize=16)
 

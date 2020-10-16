@@ -1,3 +1,11 @@
-/* this file is left blank on purpose, if developer can't find classes he needs in framework, he can customize his
-app adding his own styles here
- */
+.cl-red {
+	color: #ff3639 !important;
+}
+button {
+	border-radius: 25px;
+	background-color: #4a4a4a;
+	border: none;
+	color: white;
+	text-decoration: none;
+	padding: 12px;
+}
