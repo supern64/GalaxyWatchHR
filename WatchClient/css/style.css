@@ -1,11 +1,12 @@
 .cl-red {
 	color: #ff3639 !important;
 }
-button {
+.btn {
 	border-radius: 25px;
 	background-color: #4a4a4a;
 	border: none;
 	color: white;
 	text-decoration: none;
 	padding: 12px;
+	margin-top: 10px;
 }

@@ -4,7 +4,9 @@
 	const locPriv = "http://tizen.org/privilege/location";
 	
 	// declare some stuff
-	var isOpen = false;
+	var ws = null;
+	var intervalID = null;
+	var currentHR = 0;
 	var hasHealthP = false;
 	var hasLocationP = false;
 	
@@ -18,7 +20,7 @@
 	}
 	window.exit = exit;
 	
-	// permission handling
+	// permission handling/events
 	function simplifyPerms(s) {
 		switch(s) {
 			case "PPM_ALLOW":
@@ -99,8 +101,16 @@
 		}
 	}
 	
+	// heart rate event
+	function onHR(hr) {
+		hr = hr.heartRate;
+		if (hr < 0) {
+			hr = 0;
+		}
+		currentHR = hr;
+	}
 	
-	// event handling
+	// button/misc. events
 	window.addEventListener("tizenhwkey", function (ev) {
 		var activePopup = null,
 			page = null,
@@ -114,8 +124,8 @@
 			if (pageId === "main" && !activePopup) {
 				try {
 					exit();
-				} catch (ignore) {
-				}
+					// TODO: handle connection cases on app exit
+				} catch (ignore) {}
 			} else {
 				window.history.back();
 			}
@@ -126,10 +136,42 @@
 		var toAsk = checkInitialPermissions();
 		requestPermissions(toAsk);
 	});
+	document.getElementById('connect').addEventListener('click', function() {
+		var address = document.getElementById("address").innerText;
+		var message = document.getElementById("message");
+		if (address.replace(" ", "").length > 0) {
+			ws = new WebSocket("ws://" + address + ":9288");
+			ws.addEventListener("open", function() {
+				ws.send(JSON.stringify({type: "handshake", role: "watch"}));
+				tizen.humanactivitymonitor.start("HRM", onHR);
+				intervalID = setInterval(function() {
+					if (ws.readyState === 1) {
+						ws.send(JSON.stringify({type: "data", hr: currentHR}));
+						document.getElementById("heart-rate").innerText = currentHR;
+					}
+				}, 1000);
+				changePage("display");
+			});
+			ws.addEventListener("close", function() {
+				message.classList.remove("cl-red");
+				message.innerText = "Disconnected.";
+				clearInterval(intervalID);
+				tizen.humanactivitymonitor.stop("HRM");
+				changePage("connect");
+			})
+			
+		} else {
+			message.classList.add('cl-red');
+			message.innerText = "Please enter an address."
+		}
+	});
+	document.getElementById("disconnect").addEventListener('click', function() {
+		ws.close();
+	});
 	
 	// main
 	function init() {
-		
+		changePage("connect");
 	}
 	
 	const isSupported = tizen.systeminfo.getCapability("http://tizen.org/feature/sensor.heart_rate_monitor");

@@ -26,9 +26,9 @@
 		<div class="ui-content ui-content-padding">
 			Your device is not compatible with this program. Please exit.
 		</div>
-		<div class="ui-footer">
+		<footer class="ui-footer ui-bottom-button">
 			<button class="ui-btn" onclick="exit()" id="exit">Exit</button>
-		</div>
+		</footer>
 	</div>
 	<div class="ui-page" id="noPermission">
 		<header class="ui-header">
@@ -36,9 +36,7 @@
 		</header>
 		<div class="ui-content ui-content-padding">
 			Your device does not allow asking for permissions or you denied a permission forever. Please turn them back on yourself.
-		</div>
-		<div class="ui-footer">
-			<button class="ui-btn" onclick="exit()" id="exit">Exit</button>
+			<button class="btn" onclick="exit()" id="exit">Exit</button>
 		</div>
 	</div>
 	<div class="ui-page" id="generalError">
@@ -47,9 +45,7 @@
 		</header>
 		<div class="ui-content ui-content-padding">
 			An unexpected error occured. Please exit.
-		</div>
-		<div class="ui-footer">
-			<button class="ui-btn" onclick="exit()" id="exit">Exit</button>
+			<button class="btn" onclick="exit()" id="exit">Exit</button>
 		</div>
 	</div>
 	<!-- Popups -->
@@ -59,18 +55,27 @@
 	  	 HR2PC requires all of the permissions requested.<br>
 	  	 No data collected will be sent to the Internet, only to your computer.<br>
 	  	 Please grant H2RPC permissions.
-	   </div>
-	   <div class="ui-popup-footer">
-	      <button id="notEnoughPerm-cancel" class="ui-btn">OK</button>
+	  	 <button class="btn" id="notEnoughPerm-cancel">OK</button>
 	   </div>
 	</div>
 	<!-- UI Pages -->
-	<div class="ui-page ui-page-active" id="connect">
+	<div class="ui-page" id="connect">
 		<header class="ui-header">
 			<h2 class="ui-title">HR2PC</h2>
 		</header>
 		<div class="ui-content ui-content-padding">
-			<p>Please enter the server's IP address.</p>
+			<span id="message">Please enter the server's IP address.</span>
+			<input id="address" type="text">
+			<button class="btn" id="connect">Connect</button>
+		</div>
+	</div>
+	<div class="ui-page" id="display">
+		<header class="ui-header">
+			<h2 class="ui-title cl-red">Current Heart Rate:</h2>
+		</header>
+		<div class="ui-content ui-content-padding">
+			<h1 id="heart-rate">0</h1>
+			<button style="margin-top: 25px" class="btn" id="disconnect">Disconnect</button>
 		</div>
 	</div>
 	<script src="lib/tau/wearable/js/tau.min.js"></script>
