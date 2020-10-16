@@ -90,7 +90,7 @@ def on_message(client, server, message):
     if send_res is True:
         if res["type"] == "error":
             print("Client triggered an error: " + res["message"])
-            print("From client: " + json.dumps(message))
+            print("With message: " + json.dumps(message))
         server.send_message(client, json.dumps(res))
     else:
         send_res = True
