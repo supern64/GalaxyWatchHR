@@ -1,0 +1,11 @@
+.vscode/
+# TizenDev
+.settings/
+.project
+.sign/
+*.wgt
+# PyInstaller
+build/
+dist/
+main.spec
+__pycache__/
