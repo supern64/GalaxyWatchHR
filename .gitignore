@@ -2,6 +2,7 @@
 # TizenDev
 .settings/
 .project
+.tproject
 .sign/
 *.wgt
 # PyInstaller
