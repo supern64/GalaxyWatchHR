@@ -14,7 +14,7 @@ x_time = []
 
 pg.setConfigOptions(antialias=True) 
 view = pg.GraphicsLayoutWidget(title="HR2PC QTRewrite")
-p = view.addPlot(title="Heart Rate Monitor")
+p = view.addPlot(title='<h2 style="color:white;">Heart Rate Monitor</h2>')
 curve = p.plot()
 
 view.show()

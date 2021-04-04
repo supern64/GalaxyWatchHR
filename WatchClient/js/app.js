@@ -144,6 +144,7 @@
 			ws.addEventListener("open", function() {
 				ws.send(JSON.stringify({type: "handshake", role: "watch"}));
 				tizen.humanactivitymonitor.start("HRM", onHR);
+				tizen.power.request("CPU", "CPU_AWAKE");
 				intervalID = setInterval(function() {
 					if (ws.readyState === 1) {
 						ws.send(JSON.stringify({type: "data", hr: currentHR}));
