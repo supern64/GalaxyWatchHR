@@ -19,10 +19,14 @@ curve = p.plot()
 
 view.show()
 
+app.aboutToQuit.connect(exit)
+
 def update():
     curve.setData(y_hr)
     if len(x_time) != 0:
         curve.setPos(x_time[-1], 0)
+        title = '<h3 style="color:white;">Current: {0} | Average: {1} | Peak: {2}</h3>'
+        p.setTitle(title.format(y_hr[-1], round(sum(y_hr)/len(y_hr)), max(y_hr)))
     app.processEvents()
 
 
@@ -98,8 +102,12 @@ def run_server():
 if __name__ == '__main__':
     t = threading.Thread(target=run_server, daemon=True)
     t.start()
-    while True:
-        update()
+    timer = QtCore.QTimer()
+    timer.timeout.connect(update)
+    timer.start(20)
     app.exec_()
+    
+    
+
 
 
