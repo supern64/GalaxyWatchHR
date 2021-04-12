@@ -16,7 +16,6 @@ function connect() {
 	socket.addEventListener('message', function (event) {
 		var message = JSON.parse(event.data);
 		if (message.hr) {
-			// 
 			hr.innerText = message.hr;
 			var spb = 1/(message.hr/60)
 			heartImg.style.animation = "pulse " + spb + "s infinite"
