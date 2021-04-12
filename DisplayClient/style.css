@@ -4,3 +4,17 @@ body {
 	font-size: 60em;
 	color: #ffffff;
 }
+#hr {
+	vertical-align: middle;
+}
+
+#pulsingheart { 
+  	vertical-align: middle;
+  	display: inline-block;
+  	height: 1em;
+  	width: 1em;
+} 
+
+@keyframes pulse {
+	10% {transform: scale(1.1)}
+}
